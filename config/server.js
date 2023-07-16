@@ -4,7 +4,6 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  // url: env('PUBLIC_URL', 'https://strapi.fruitspickingjobs.com'),
   admin: {
     url: '/admin',
     serveAdminPanel: true,
