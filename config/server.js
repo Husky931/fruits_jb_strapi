@@ -9,7 +9,7 @@ module.exports = ({ env }) => ({
   //   url: '/admin',
   //   serveAdminPanel: true,
   // },
-  // cron HII
+  // cron HII YOO
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
