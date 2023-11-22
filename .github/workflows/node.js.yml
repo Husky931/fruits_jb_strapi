@@ -14,9 +14,9 @@ jobs:
 #        run:
 #          working-directory: ./frontend
 #          shell: bash
-   strategy:
-     matrix:
-       node-version: [18.x]
+   # strategy:
+   #   matrix:
+   #     node-version: [18.x]
    steps:
    - uses: actions/checkout@v3
      with:
