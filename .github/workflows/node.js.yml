@@ -10,17 +10,16 @@ jobs:
  build_Strapi:
    name: build_Strapi
    runs-on: self-hosted
-#      defaults:
-#        run:
-#          working-directory: ./frontend
-#          shell: bash
-   # strategy:
-   #   matrix:
-   #     node-version: [18.x]
    steps:
    - uses: actions/checkout@v3
      with:
        clean: false
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v3
+     with:
+       node-version: '18'
+        
    - name: install deps
      run: yarn install
    - name: Build Homepage
