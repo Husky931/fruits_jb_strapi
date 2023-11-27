@@ -631,7 +631,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -659,6 +658,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    userType: Attribute.Enumeration<['employer', 'jobseeker']>;
+    job_posts: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::job-post.job-post'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -880,6 +885,45 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
 }
 
+export interface ApiJobPostJobPost extends Schema.CollectionType {
+  collectionName: 'job_posts';
+  info: {
+    singularName: 'job-post';
+    pluralName: 'job-posts';
+    displayName: 'Job_Post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company_name: Attribute.String & Attribute.Required & Attribute.Unique;
+    country_location: Attribute.String & Attribute.Required;
+    city_location: Attribute.String & Attribute.Required;
+    job_description: Attribute.Text & Attribute.Required;
+    status: Attribute.Enumeration<['running', 'stopped', 'deleted', 'expired']>;
+    posted_by: Attribute.Relation<
+      'api::job-post.job-post',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::job-post.job-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::job-post.job-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLeadFormSubmissionLeadFormSubmission
   extends Schema.CollectionType {
   collectionName: 'lead_form_submissions';
@@ -1053,6 +1097,7 @@ declare module '@strapi/types' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::job-post.job-post': ApiJobPostJobPost;
       'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;
       'api::page.page': ApiPagePage;
       'api::product-feature.product-feature': ApiProductFeatureProductFeature;
