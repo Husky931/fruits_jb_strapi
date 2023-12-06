@@ -891,21 +891,32 @@ export interface ApiJobPostJobPost extends Schema.CollectionType {
     singularName: 'job-post';
     pluralName: 'job-posts';
     displayName: 'Job_Post';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    company_name: Attribute.String & Attribute.Required & Attribute.Unique;
+    company_name: Attribute.String & Attribute.Required;
     country_location: Attribute.String & Attribute.Required;
     city_location: Attribute.String & Attribute.Required;
     job_description: Attribute.Text & Attribute.Required;
-    status: Attribute.Enumeration<['running', 'stopped', 'deleted', 'expired']>;
+    status: Attribute.Enumeration<
+      ['running', 'stopped', 'deleted', 'pending', 'expired']
+    > &
+      Attribute.DefaultTo<'pending'>;
     posted_by: Attribute.Relation<
       'api::job-post.job-post',
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    company_logo: Attribute.Media;
+    URL: Attribute.String;
+    moderation_status: Attribute.Enumeration<
+      ['pending', 'approved', 'rejected']
+    > &
+      Attribute.DefaultTo<'pending'>;
+    title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
