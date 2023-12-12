@@ -918,6 +918,11 @@ export interface ApiJobPostJobPost extends Schema.CollectionType {
       Attribute.DefaultTo<'pending'>;
     title: Attribute.String & Attribute.Required;
     contact_email: Attribute.String & Attribute.Unique;
+    applicants_number: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
