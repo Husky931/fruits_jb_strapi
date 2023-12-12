@@ -917,6 +917,7 @@ export interface ApiJobPostJobPost extends Schema.CollectionType {
     > &
       Attribute.DefaultTo<'pending'>;
     title: Attribute.String & Attribute.Required;
+    contact_email: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -72,6 +72,10 @@
     "title": {
       "type": "string",
       "required": true
+    },
+    "contact_email": {
+      "type": "string",
+      "unique": true
     }
   }
 }
