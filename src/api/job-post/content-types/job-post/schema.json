@@ -75,12 +75,12 @@
     },
     "contact_email": {
       "type": "string",
-      "unique": true
+      "unique": false,
+      "required": true
     },
     "applicants_number": {
       "type": "integer",
-      "default": 0,
-      "min": 0
+      "default": 0
     }
   }
 }
