@@ -961,13 +961,6 @@ export interface ApiJobVacancyJobVacancy extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    country_location: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     city_location: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1004,6 +997,25 @@ export interface ApiJobVacancyJobVacancy extends Schema.CollectionType {
     status: Attribute.Enumeration<
       ['running', 'stopped', 'deleted', 'pending', 'expired']
     > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    country: Attribute.Enumeration<
+      [
+        'usa',
+        'canada',
+        'uk',
+        'france',
+        'austria',
+        'spain',
+        'germany',
+        'italy',
+        'belgium'
+      ]
+    > &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
