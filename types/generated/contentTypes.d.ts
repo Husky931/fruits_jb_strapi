@@ -937,6 +937,102 @@ export interface ApiJobPostJobPost extends Schema.CollectionType {
   };
 }
 
+export interface ApiJobVacancyJobVacancy extends Schema.CollectionType {
+  collectionName: 'job_vacancies';
+  info: {
+    singularName: 'job-vacancy';
+    pluralName: 'job-vacancies';
+    displayName: 'job_vacancy';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    company_name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    country_location: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    city_location: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    job_description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    company_logo: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    url: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    status: Attribute.Enumeration<
+      ['running', 'stopped', 'deleted', 'pending', 'expired']
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::job-vacancy.job-vacancy',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::job-vacancy.job-vacancy',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::job-vacancy.job-vacancy',
+      'oneToMany',
+      'api::job-vacancy.job-vacancy'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiLeadFormSubmissionLeadFormSubmission
   extends Schema.CollectionType {
   collectionName: 'lead_form_submissions';
@@ -1111,6 +1207,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::job-post.job-post': ApiJobPostJobPost;
+      'api::job-vacancy.job-vacancy': ApiJobVacancyJobVacancy;
       'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;
       'api::page.page': ApiPagePage;
       'api::product-feature.product-feature': ApiProductFeatureProductFeature;
